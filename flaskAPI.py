@@ -53,4 +53,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='https://firnas-backend-4d7teshhr-firnas-projects-053b4e12.vercel.app', port=5000)
+    app.run(host='https://firnas-backend-dvkbrgjck-firnas-projects-053b4e12.vercel.app', port=5000)

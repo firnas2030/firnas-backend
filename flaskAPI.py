@@ -18,7 +18,7 @@ uploaded_folder_path = 'STATIC/UPLOADED/'  # temp path to save images
 
 @app.route('/')
 def home():
-    # This will display a simple HTML page with a "Hi there" sentence
+    # This will display a simple HTML page with a "Hi there" sentence.
     return render_template_string('<h1>Hi there!</h1>')
 
 @app.route('/predict', methods=['POST', 'OPTIONS'])

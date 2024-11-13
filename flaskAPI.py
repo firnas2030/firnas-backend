@@ -9,7 +9,7 @@ import base64
 from yolov8 import CustomYOLOv8 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins='https://latest-firnas.vercel.app')
 model_weights_path = 'yolov8Model/best.pt'
 custom_yolo = CustomYOLOv8(model_weights_path)
 

@@ -16,7 +16,7 @@ custom_yolo = CustomYOLOv8(model_weights_path)
 predicted_folder_path = 'STATIC/TEMP/'
 uploaded_folder_path = 'STATIC/UPLOADED/'  # temp path to save images
 
-@app.route('/')
+@app.route('/home')
 def home():
     # This will display a simple HTML page with a "Hi there" sentence.
     return render_template_string('<h1>Hi there!</h1>')

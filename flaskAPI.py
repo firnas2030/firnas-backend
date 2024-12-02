@@ -1,56 +1,11 @@
-from flask import Flask, request, jsonify, render_template_string
-from flask_cors import CORS
-from PIL import Image
-import io
-import shutil
-import os
-import base64
-from yolov8 import CustomYOLOv8
+from flask import Flask
 
 app = Flask(__name__)
-CORS(app, origins='https://latest-firnas.vercel.app')
 
-model_weights_path = 'yolov8Model/best.pt'
-custom_yolo = CustomYOLOv8(model_weights_path)
-
-predicted_folder_path = 'STATIC/TEMP/'
-uploaded_folder_path = 'STATIC/UPLOADED/'  # temp path to save images
-
-@app.route('/home')
+@app.route('/')
 def home():
-    # This will display a simple HTML page with a "Hi there" sentence.
-    return render_template_string('<h1>Hi there!</h1>')
+    return 'Hello, World!'
 
-@app.route('/predict', methods=['POST', 'OPTIONS'])
-def predict():
-    try:
-        # Get the uploaded image data
-        filename = 'uploaded_img.jpg'
-        image_data = request.files['image']
-        img_path = uploaded_folder_path + filename
-        image_data.save(img_path)
-        predictions = custom_yolo.predict_image(img_path, filename)
-        
-        predicted_image_path = predicted_folder_path + filename
-        # Read the image data
-        with open(predicted_image_path, 'rb') as image_file:
-            image_data = image_file.read()
-
-        # Convert the image data to a base64-encoded string
-        image_base64 = base64.b64encode(image_data).decode()
-
-        # Return response
-        response = jsonify({
-            'predictions': predictions,
-            'annotated_image_base64': image_base64
-        })
-
-        # Set the Access-Control-Allow-Origin header manually if needed
-        response.headers['Access-Control-Allow-Origin'] = 'https://latest-firnas.vercel.app'
-        return response
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(host='https://firnas-backend-dvkbrgjck-firnas-projects-053b4e12.vercel.app', port=5000)
+@app.route('/about')
+def about():
+    return 'About'
